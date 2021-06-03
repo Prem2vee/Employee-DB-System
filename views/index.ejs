@@ -1,34 +1,44 @@
 <%- include('partials/header') -%>
     <div class="container mt-5">
-        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-            <thead>
-                <tr>
+        <%- include('partials/messages') -%>
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Designation</th>
+                        <th>Salary</th>
+                        <th>Operations</th>
+                    </tr>
+                </thead>
+                <tfoot>
                     <th>Name</th>
                     <th>Designation</th>
                     <th>Salary</th>
                     <th>Operations</th>
-                </tr>
-            </thead>
-            <tfoot>
-                <th>Name</th>
-                <th>Designation</th>
-                <th>Salary</th>
-                <th>Operations</th>
-            </tfoot>
-            <tbody>
-                <tr>
-                    <td>Mike</td>
-                    <td>Manager</td>
-                    <td>$12000</td>
-                    <td>
-                        <a class="btn btn-primary" href="">Edit</a>
-                        <form style="display: inline" action="" method="POST">
-                            <input type="hidden" none="method" value="DELETE">
-                            <button style="cursor: pointer" type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                </tfoot>
+                <tbody>
+                    <% employees.forEach((employee)=> { %>
+                        <tr>
+                            <td>
+                                <%= employee.name %>
+                            </td>
+                            <td>
+                                <%= employee.designation %>
+                            </td>
+                            <td>
+                                $<%= employee.salary %>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary" href="/edit/<%= employee.id%>">Edit</a>
+                                <form style="display: inline" action="/delete/<%= employee.id %>?_method=DELETE"
+                                    method="POST">
+                                    <input type="hidden" none="method" value="DELETE">
+                                    <button style="cursor: pointer" type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
     </div>
     <%- include('partials/footer') -%>
